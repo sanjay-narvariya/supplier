@@ -1,0 +1,194 @@
+<style>
+  body {
+    margin: 0;
+  }
+
+  .maincontainer {
+    background-color: rgba(121, 74, 101, 0.505);
+    background-size: auto;
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins";
+  }
+
+  .box {
+    background: rgba(96, 110, 174, 0.891);
+    width: 80%;
+    height: "auto";
+    border-radius: 10px;
+    padding: 20px;
+
+  }
+
+  .heading {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .headingstyle {
+    margin: 10px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .addpic {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+  }
+
+  .btncenter {
+    display: flex;
+    justify-content: center;
+  }
+
+  .btnsize {
+    margin-top: 5px;
+    width: 80%;
+  }
+</style>
+<html>
+
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="/javascripts/product.js"></script>
+</head>
+<form action="/supply/update_product_data" method="post">
+  <div class="maincontainer">
+    <div class="box">
+<input type="hidden" value="<%=data.supplierid %>" name="supplierid">
+ 
+      <div class="row">
+        <div class="col-12">
+          <div class="heading">
+            <img src="/images/sellericon.jpg" width="60px" height="50px" />
+            <div class="headingstyle">Update Product Form</div>
+            <div style="margin-left: auto;">
+              <a href="/supply/display_all_sell"><img src="/images/sellpageicon.png" class="addpic" /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-sm-12 col-lg-4" style="margin-bottom: 5px;">
+          <select required class="form-select" name="stateid" id="stateid">
+            <option selected value="<%=data.stateid %>">
+              <%=data.statename %>
+            </option>
+          </select>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-lg-4" style="margin-bottom: 5px;">
+          <select required class="form-select" name="cityid" id="cityid">
+            <option selected value="<%=data.cityid %>">
+              <%=data.cityname %>
+            </option>
+          </select>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-lg-4">
+          <input required class="form-control" type="text" value="<%=data.suppliername %>"
+            placeholder="Input supplier name...." name="suppliername" id="suppliername">
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 10px;">
+        <h5><u>Selling Products</u></h5>
+      </div>
+      <div class="row" style="padding-left: 10px;">
+        <% var p=data.products %>
+
+          <div class="form-check form-check-inline col-xs-12 col-sm-12 col-lg-2">
+            <input <% if(p.includes('cement')){ %> checked <% } %> class="form-check-input" onchange="showPicture()"
+              type="checkbox" id="product1" name="products" value="cement">
+              <label class="form-check-label" for="product1"><b>Cement</b></label>
+          </div>
+          <div class="col-sm-12 col-xs-12 col-lg-2">
+            <img id="fp1">
+          </div>
+          <div class="form-check form-check-inline col-xs-12 col-sm-12 col-lg-2">
+            <input <% if(p.includes('bricks')){ %> checked <% } %> class="form-check-input" onchange="showPicture()"
+              type="checkbox" id="product2" name="products" value="bricks">
+              <label class="form-check-label" for="product2"><b>Bricks</b></label>
+          </div>
+          <div class="col-sm-12 col-xs-12 col-lg-2">
+            <img id="fp2">
+          </div>
+          <div class="form-check form-check-inline col-xs-12 col-sm-12 col-lg-2">
+            <input <% if(p.includes('iron')){ %> checked <% } %> class="form-check-input" onchange="showPicture()"
+              type="checkbox" id="product3" name="products" value="iron">
+              <label class="form-check-label" for="product3"><b>Iron</b></label>
+          </div>
+          <div class="col-sm-12 col-xs-12 col-lg-1">
+            <img id="fp3">
+          </div>
+
+      </div>
+
+      <div class="row" style="margin-top: 10px;">
+        <div class="col-lg-12">
+          <textarea required class="form-control" name="address" rows="1"><%=data.address %></textarea>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-sm-12 col-lg-12" style="margin-bottom: 5px;">
+          <input required class="form-control" type="text" value="<%=data.firmname %>" placeholder="Firmname..."
+            name="firmname" id="firmname">
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 10px;">
+        <div class="col-xs-12 col-sm-12 col-lg-4" style="margin-bottom: 5px;">
+          <input required type="text" value="<%=data.dueamount %>" class="form-control" name="dueamount"
+            placeholder="Dueamount..">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-lg-4" style="margin-bottom: 5px;">
+          <input required type="text" class="form-control" value="<%=data.advance %>" name="advance"
+            placeholder="Advance..">
+        </div>
+        <div class="col-xs-12 col-sm-12 col-lg-4">
+          <% var d=new Date(data.advancedate) 
+          var mm=d.getMonth()+1 > 9 ? d.getMonth()+1 : '0'+(d.getMonth()+1)
+          var dd=d.getDate()>9 ? d.getDate() : '0'+(d.getDate())
+          var pd=d.getFullYear()+"-"+mm+"-"+dd  %>
+          <input required type="date" value='<%=pd %>' class="form-control" name="advancedate">
+        </div>
+      </div>
+
+
+      <div class="row" style="margin-top: 20px; ">
+        <div class="col-xs-12 col-sm-12 col-lg-6 btncenter">
+          <button type="submit" name="btn" value="Edit" class="btn btn-primary btnsize">Edit</button>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-lg-6 btncenter">
+          <button type="submit" name="btn" value="Delete" class="btn btn-primary btnsize">Delete</button>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</form>
+
+</html>
